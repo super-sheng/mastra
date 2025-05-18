@@ -4,6 +4,7 @@ import { createLogger } from '@mastra/core/logger';
 import { codeReviewAgent } from "./agents/codeReviewAgent";
 import { LibSQLStore } from '@mastra/libsql';
 import {CloudflareDeployer} from '@mastra/deployer-cloudflare'
+import { CloudflareStore } from '@mastra/cloudflare';
 export const mastra = new Mastra({
   deployer: new CloudflareDeployer({
     scope: "aec27f29b93fcac6ffc53d6b1fa4eac8",
@@ -15,10 +16,10 @@ export const mastra = new Mastra({
     //     custom_domain: true,
     //   },
     // ],
-    workerNamespace: "your-namespace",
+    workerNamespace: "code-review",
     auth: {
-      apiToken: "your-api-token",
-      apiEmail: "your-email",
+      apiToken: "_TLnESenmmLUsKqwJewgRzL07ZVwMy6AvZVSMi5V",
+      apiEmail: "max.capricorn1209@gmail.com",
     },
   }),
   agents: {
@@ -28,9 +29,15 @@ export const mastra = new Mastra({
     name: 'Mastra',
     level: 'info',
   }),
-  storage: new LibSQLStore({
-    // stores telemetry, evals, ... into memory storage, if it needs to persist, change to file:../mastra.db
-    url: ":memory:",
+  storage: new CloudflareStore({
+    apiToken: "00a2py1BPBUCO2nFzkmxCS2wRmTzKtjo31Jv8qVw",
+    accountId: 'aec27f29b93fcac6ffc53d6b1fa4eac8',
+    namespacePrefix: 'cr'
+    // bindings: {
+    //   cr: 'cr', // KVNamespace binding for threads table
+    //   // Add other tables as needed
+    // },
+    // keyPrefix: "cr", // Optional: isolate keys per environment
   }),
 });
 // export const mastra = new Mastra({
