@@ -1,0 +1,13 @@
+name = "code-review-agent"
+main = "src/worker.js"
+compatibility_date = "2025-05-01"
+
+[vars]
+# 环境变量配置
+OPENAI_API_KEY = ""
+# 注意：敏感信息如 API 密钥不应直接放在这里
+
+# 如果您需要使用 KV 存储（可选）
+# [[kv_namespaces]]
+binding = "CODEREVIEW_KV"
+id = "您的KV命名空间ID"
